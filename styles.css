@@ -1,0 +1,74 @@
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(145deg, #111, #1e1e1e);
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .quiz-container {
+      background-color: #1b1b1b;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      width: 90%;
+      max-width: 500px;
+      text-align: center;
+    }
+    h1 {
+      color: #ed3200;
+      margin-bottom: 1rem;
+    }
+    .question {
+      display: none;
+    }
+    .question.active {
+      display: block;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin: 1rem 0 0.5rem;
+    }
+    select {
+      width: 100%;
+      padding: 0.5rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: none;
+      background-color: #333;
+      color: white;
+    }
+    button {
+      margin-top: 1.5rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #ed3200;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      width: 100%;
+    }
+    button:hover {
+      background-color: #ff4b1f;
+    }
+    #result {
+      margin-top: 2rem;
+      font-size: 1.2rem;
+    }
+    .progress {
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      color: #aaaaaa;
+    }
+    a {
+      color: #7cd1ff;
+    }

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Citizen Soldier Song Picker</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="script" href="finder.js">
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>Citizen Soldier Song Picker</h1>
+    <div class="progress" id="progressText">Question 1 of 3</div>
+    <form id="quizForm" onsubmit="event.preventDefault();">
+      <div class="question active" id="q1">
+        <label for="mood">How are you feeling today?</label>
+        <select id="mood" required>
+          <option value="">Select...</option>
+          <option value="sad">Sad</option>
+          <option value="angry">Angry</option>
+          <option value="numb">Numb</option>
+          <option value="hopeful">Hopeful</option>
+        </select>
+        <button type="button" onclick="nextQuestion(2)">Next</button>
+      </div>
+      <div class="question" id="q2">
+        <label for="struggle">What's your biggest struggle right now?</label>
+        <select id="struggle" required>
+          <option value="">Select...</option>
+          <option value="self-worth">Self-worth</option>
+          <option value="pain">Pain</option>
+          <option value="trauma">Trauma</option>
+          <option value="mental-health">Mental health</option>
+        </select>
+        <button type="button" onclick="nextQuestion(3)">Next</button>
+      </div>
+      <div class="question" id="q3">
+        <label for="need">What do you need most?</label>
+        <select id="need" required>
+          <option value="">Select...</option>
+          <option value="understanding">To be understood</option>
+          <option value="strength">Strength</option>
+          <option value="healing">Healing</option>
+          <option value="escape">An escape</option>
+        </select>
+        <button type="submit" onclick="pickSong()">See My Song</button>
+      </div>
+    </form>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    const songs = [
+      { title: "Let It Burn", url: "https://www.youtube.com/watch?v=YCmEO0ipKxg", tags: ["angry", "strength"] },
+      { title: "Found", url: "https://youtu.be/EdfhzKK3WJs", tags: ["hopeful", "healing"] },
+      { title: "Say Goodbye", url: "https://youtu.be/v0XYCNsi7H8", tags: ["sad", "pain"] },
+      { title: "Devil Inside", url: "https://youtu.be/B_9fg9PRKck", tags: ["angry", "trauma"] },
+      { title: "Buried Alive", url: "https://www.youtube.com/watch?v=DLJi0uxXGY4", tags: ["numb", "mental-health"] },
+      { title: "Better Place", url: "https://youtu.be/aLKZSxpzrPE", tags: ["hopeful", "healing"] },
+      { title: "Unbreakable", url: "https://youtu.be/zFdidR8HObI", tags: ["strength", "hopeful"] },
+      { title: "If These Scars Could Speak", url: "https://youtu.be/hbtDPxKcijY", tags: ["sad", "trauma", "understanding"] },
+      { title: "Never Good Enough", url: "https://youtu.be/oHN3TPq1upw", tags: ["self-worth", "mental-health"] },
+      { title: "Kill My Memory", url: "https://youtu.be/W1UpXNj8sgc", tags: ["pain", "escape"] },
+    ];
+
+    function nextQuestion(num) {
+      document.querySelector(`#q${num - 1}`).classList.remove("active");
+      document.querySelector(`#q${num}`).classList.add("active");
+      document.getElementById("progressText").textContent = `Question ${num} of 3`;
+    }
+
+    function pickSong() {
+      const mood = document.getElementById("mood").value;
+      const struggle = document.getElementById("struggle").value;
+      const need = document.getElementById("need").value;
+
+      const selectedTags = [mood, struggle, need].filter(Boolean);
+
+      let matchingSongs = songs.filter(song =>
+        selectedTags.every(tag => song.tags.includes(tag))
+      );
+
+      if (matchingSongs.length === 0) {
+        matchingSongs = songs.filter(song =>
+          selectedTags.some(tag => song.tags.includes(tag))
+        );
+      }
+
+      const song = matchingSongs.length > 0
+        ? matchingSongs[Math.floor(Math.random() * matchingSongs.length)]
+        : songs[Math.floor(Math.random() * songs.length)];
+
+      document.getElementById("quizForm").style.display = "none";
+      document.getElementById("progressText").style.display = "none";
+      document.getElementById("result").innerHTML = `🎵 <strong>${song.title}</strong><br><a href="${song.url}" target="_blank">Listen on YouTube</a>`;
+    }
+  </script>
+</body>
+</html>
