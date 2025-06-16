@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Citizen Soldier Song Picker</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="finder.js"></script>
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>Citizen Soldier Song Picker</h1>
+    <div class="progress" id="progressText">Question 1 of 3</div>
+    <form id="quizForm" onsubmit="event.preventDefault();">
+      <div class="question active" id="q1">
+        <label for="mood">How are you feeling today?</label>
+        <select id="mood" required>
+          <option value="">Select...</option>
+          <option value="sad">Sad</option>
+          <option value="angry">Angry</option>
+          <option value="numb">Numb</option>
+          <option value="hopeful">Hopeful</option>
+        </select>
+        <button type="button" onclick="nextQuestion(2)">Next</button>
+      </div>
+      <div class="question" id="q2">
+        <label for="struggle">What's your biggest struggle right now?</label>
+        <select id="struggle" required>
+          <option value="">Select...</option>
+          <option value="self-worth">Self-worth</option>
+          <option value="pain">Pain</option>
+          <option value="trauma">Trauma</option>
+          <option value="mental-health">Mental health</option>
+        </select>
+        <button type="button" onclick="nextQuestion(3)">Next</button>
+      </div>
+      <div class="question" id="q3">
+        <label for="need">What do you need most?</label>
+        <select id="need" required>
+          <option value="">Select...</option>
+          <option value="understanding">To be understood</option>
+          <option value="strength">Strength</option>
+          <option value="healing">Healing</option>
+          <option value="escape">An escape</option>
+        </select>
+        <button type="submit" onclick="pickSong()">See My Song</button>
+      </div>
+    </form>
+    <div id="result"></div>
+  </div>
+</body>
+</html>
